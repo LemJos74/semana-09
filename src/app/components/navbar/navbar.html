@@ -1,0 +1,29 @@
+<header class="navbar">
+  <a routerLink="/" class="navbar__brand" aria-label="API Explorer - inicio">
+    <span class="navbar__logo" aria-hidden="true">◉</span>
+    <span class="navbar__title">API Explorer</span>
+  </a>
+
+  <nav class="navbar__links" aria-label="Navegación principal">
+    @for (link of links; track link.path) {
+      <a
+        class="navbar__link"
+        [routerLink]="link.path"
+        routerLinkActive="navbar__link--active"
+        [routerLinkActiveOptions]="{ exact: link.exact }"
+      >
+        {{ link.label }}
+      </a>
+    }
+  </nav>
+
+  <button
+    type="button"
+    class="navbar__sound"
+    [attr.aria-pressed]="sound.enabled()"
+    [attr.aria-label]="sound.enabled() ? 'Silenciar sonido' : 'Activar sonido'"
+    (click)="onToggleSound()"
+  >
+    {{ sound.enabled() ? '🔊' : '🔇' }}
+  </button>
+</header>

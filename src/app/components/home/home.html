@@ -1,0 +1,27 @@
+<section class="home">
+  <header class="home__hero">
+    <p class="home__eyebrow">Explorador de APIs</p>
+    <h1 class="home__title">Elige una API</h1>
+    <p class="home__subtitle">
+      Cada API tiene su propio buscador, filtros y detalle. Se irán añadiendo más.
+    </p>
+  </header>
+
+  <div class="home__grid">
+    @for (api of apis; track api.id) {
+      <a
+        class="card"
+        [class.card--pokemon]="api.accent === 'card--pokemon'"
+        [class.card--portal]="api.accent === 'card--portal'"
+        [routerLink]="api.route"
+        (click)="onEnter(api)"
+      >
+        <span class="card__glyph" aria-hidden="true">{{ api.glyph }}</span>
+        <span class="card__tag">{{ api.tag }}</span>
+        <h2 class="card__title">{{ api.title }}</h2>
+        <p class="card__description">{{ api.description }}</p>
+        <span class="card__cta">Explorar →</span>
+      </a>
+    }
+  </div>
+</section>

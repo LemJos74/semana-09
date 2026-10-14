@@ -1,0 +1,115 @@
+<div class="pokedex">
+  <header class="pokedex__header">
+    <div class="lens" aria-hidden="true"><span class="lens__dot"></span></div>
+    <div class="titles">
+      <h1 class="title">Pokédex</h1>
+      <p class="subtitle">Busca y filtra tus Pokémon favoritos</p>
+    </div>
+    <div class="header-leds" aria-hidden="true">
+      <span class="led led--red"></span>
+      <span class="led led--yellow"></span>
+      <span class="led led--green"></span>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Búsqueda y filtros">
+    <div class="search">
+      <label class="search__label" for="pokemon-search">Buscar</label>
+      <input
+        id="pokemon-search"
+        class="search__input"
+        type="search"
+        placeholder="Nombre o número (#025, pikachu...)"
+        [value]="query()"
+        (input)="onQueryInput($event)"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="filters">
+      <div class="filters__row">
+        <span class="filters__label">Tipos:</span>
+        @for (type of types(); track type) {
+          <button
+            type="button"
+            class="type-chip type-chip--button"
+            [class.type-chip--active]="isSelected(type)"
+            [attr.data-type]="type"
+            [attr.aria-pressed]="isSelected(type)"
+            (click)="toggleType(type)"
+          >
+            {{ type }}
+          </button>
+        }
+      </div>
+      @if (selectedTypes().length > 0 || query().length > 0) {
+        <button type="button" class="clear-btn" (click)="clearFilters()">Limpiar filtros ✕</button>
+      }
+    </div>
+  </section>
+
+  <p class="status-line" role="status">
+    @if (status() === 'loading') {
+      Cargando Pokémon...
+    } @else if (filtered().length === 0) {
+      No se encontraron Pokémon.
+    } @else {
+      Mostrando {{ pageItems().length }} de {{ filtered().length }} Pokémon · página
+      {{ safePage() }} de {{ pageCount() }}
+    }
+  </p>
+
+  @if (status() === 'error') {
+    <div class="alert" role="alert">
+      No se pudo conectar con la PokeAPI. Revisa tu conexión y vuelve a intentarlo.
+    </div>
+  }
+
+  @if (pendingTypes().length > 0) {
+    <div class="alert alert--info" role="status">Cargando filtro por tipo...</div>
+  }
+
+  <main class="grid">
+    @for (item of pageItems(); track item.id) {
+      <app-pokemon-card
+        [item]="item"
+        [detail]="details().get(item.id) ?? null"
+        (selected)="open($event)"
+      />
+    } @empty {
+      @if (status() === 'ok') {
+        <p class="empty">Sin resultados. Prueba con otro nombre o tipo.</p>
+      }
+    }
+  </main>
+
+  @if (pageCount() > 1) {
+    <nav class="pagination" aria-label="Paginación">
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="safePage() <= 1"
+        (click)="prevPage()"
+      >
+        ← Anterior
+      </button>
+      <span class="pagination__info">{{ safePage() }} / {{ pageCount() }}</span>
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="safePage() >= pageCount()"
+        (click)="nextPage()"
+      >
+        Siguiente →
+      </button>
+    </nav>
+  }
+</div>
+
+@if (modalLoading()) {
+  <div class="modal-loading" role="status">Cargando detalles...</div>
+}
+
+@if (modalDetail(); as detail) {
+  <app-pokemon-modal [detail]="detail" (closed)="closeModal()" />
+}

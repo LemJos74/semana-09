@@ -1,1 +1,111 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global theme: dark shell (nav/home/Rick and Morty) + classic red Pokédex panel */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  background: #0b1210;
+  background-image:
+    radial-gradient(ellipse at 20% -10%, rgba(61, 255, 135, 0.08), transparent 55%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 2px,
+      transparent 10px
+    );
+  color: #e6e6e6;
+}
+
+/* Type chip base style (shared by cards, modal and filters) */
+.type-chip {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 2px solid #2b2b2b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+/* Type chip colors */
+[data-type='normal'] {
+  background: #a8a878;
+}
+[data-type='fire'] {
+  background: #f08030;
+}
+[data-type='water'] {
+  background: #6890f0;
+}
+[data-type='electric'] {
+  background: #f8d030;
+  color: #2b2b2b;
+  text-shadow: none;
+}
+[data-type='grass'] {
+  background: #78c850;
+}
+[data-type='ice'] {
+  background: #98d8d8;
+  color: #2b2b2b;
+  text-shadow: none;
+}
+[data-type='fighting'] {
+  background: #c03028;
+}
+[data-type='poison'] {
+  background: #a040a0;
+}
+[data-type='ground'] {
+  background: #e0c068;
+  color: #2b2b2b;
+  text-shadow: none;
+}
+[data-type='flying'] {
+  background: #a890f0;
+}
+[data-type='psychic'] {
+  background: #f85888;
+}
+[data-type='bug'] {
+  background: #a8b820;
+}
+[data-type='rock'] {
+  background: #b8a038;
+}
+[data-type='ghost'] {
+  background: #705898;
+}
+[data-type='dragon'] {
+  background: #7038f8;
+}
+[data-type='dark'] {
+  background: #705848;
+}
+[data-type='steel'] {
+  background: #b8b8d0;
+  color: #2b2b2b;
+  text-shadow: none;
+}
+[data-type='fairy'] {
+  background: #ee99ac;
+}

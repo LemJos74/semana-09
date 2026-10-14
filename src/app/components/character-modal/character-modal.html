@@ -1,0 +1,81 @@
+<div class="backdrop" (click)="close()" role="presentation">
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Detalle de ' + character.name"
+    (click)="$event.stopPropagation()"
+  >
+    <button type="button" class="modal__close" (click)="close()" aria-label="Cerrar">✕</button>
+
+    <header class="modal__header">
+      <img
+        class="modal__avatar"
+        [src]="character.image"
+        [alt]="character.name"
+        width="200"
+        height="200"
+      />
+      <div class="modal__heading">
+        <span class="modal__id">#{{ character.id }}</span>
+        <h2 class="modal__name">{{ character.name }}</h2>
+        <span
+          class="badge"
+          [class.status--Alive]="character.status === 'Alive'"
+          [class.status--Dead]="character.status === 'Dead'"
+          [class.status--unknown]="character.status === 'unknown'"
+        >
+          {{ character.status }}
+        </span>
+        @if (character.type) {
+          <span class="modal__type">{{ character.type }}</span>
+        }
+      </div>
+    </header>
+
+    <section class="modal__facts">
+      <div class="fact">
+        <span class="fact__label">Especie</span>
+        <span class="fact__value">{{ character.species }}</span>
+      </div>
+      <div class="fact">
+        <span class="fact__label">Género</span>
+        <span class="fact__value">{{ character.gender }}</span>
+      </div>
+      <div class="fact fact--wide">
+        <span class="fact__label">Origen</span>
+        <span class="fact__value">{{ character.origin }}</span>
+      </div>
+      <div class="fact fact--wide">
+        <span class="fact__label">Ubicación actual</span>
+        <span class="fact__value">{{ character.location }}</span>
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3 class="modal__section-title">Episodios</h3>
+      <p class="modal__episode-count">{{ episodesLabel }}</p>
+
+      @if (showEpisodes) {
+        <ul class="episodes">
+          <li class="episode">
+            <span class="episode__tag">Primero</span>
+            <span class="episode__name">
+              {{ firstEpisode?.episode }} · {{ firstEpisode?.name }}
+              <small>{{ firstEpisode?.air_date }}</small>
+            </span>
+          </li>
+          @if (!isSameEpisode) {
+            <li class="episode">
+              <span class="episode__tag">Último</span>
+              <span class="episode__name">
+                {{ lastEpisode?.episode }} · {{ lastEpisode?.name }}
+                <small>{{ lastEpisode?.air_date }}</small>
+              </span>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  </div>
+</div>

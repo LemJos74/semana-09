@@ -1,0 +1,265 @@
+.pokedex {
+  max-width: 76rem;
+  margin: 1rem auto 3rem;
+  padding: 1.25rem 1rem 3rem;
+  background: #ededed;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.03) 0,
+    rgba(0, 0, 0, 0.03) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  color: #2b2b2b;
+  border: 3px solid #000;
+  border-radius: 16px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pokedex__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: #cc0000;
+  border: 4px solid #2b2b2b;
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.75);
+}
+
+.lens {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #f4f4f4;
+  border: 4px solid #2b2b2b;
+}
+
+.lens__dot {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #9fd8ff, #1a73e8 60%, #0b3d91);
+}
+
+.titles {
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin: 0.2rem 0 0;
+  color: #ffd7d7;
+  font-size: 0.9rem;
+}
+
+.header-leds {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.led {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  border: 2px solid #2b2b2b;
+}
+
+.led--red {
+  background: #ff5a5a;
+}
+.led--yellow {
+  background: #ffd93b;
+}
+.led--green {
+  background: #4cd964;
+}
+
+.controls {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: #f4f4f4;
+  border: 4px solid #2b2b2b;
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.75);
+}
+
+.search__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.search__input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  font-size: 1rem;
+  background: #fff;
+  border: 3px solid #2b2b2b;
+  border-radius: 8px;
+}
+
+.search__input:focus-visible {
+  outline: 3px solid #cc0000;
+  outline-offset: 1px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.filters__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.filters__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.type-chip--button {
+  cursor: pointer;
+  font: inherit;
+  opacity: 0.55;
+  transform: scale(0.96);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+}
+
+.type-chip--button:hover,
+.type-chip--button:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+.type-chip--button.type-chip--active {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow:
+    0 0 0 3px #f4f4f4,
+    0 0 0 5px #2b2b2b;
+}
+
+.clear-btn {
+  padding: 0.35rem 0.8rem;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  background: #cc0000;
+  border: 3px solid #2b2b2b;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.status-line {
+  margin: 1rem 0 0.75rem;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  background: #ffe9e9;
+  border: 3px solid #cc0000;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.alert--info {
+  background: #e8f1ff;
+  border-color: #1a73e8;
+  color: #0b3d91;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-weight: 600;
+  color: #7a7a7a;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pagination__btn {
+  padding: 0.6rem 1.1rem;
+  font: inherit;
+  font-weight: 700;
+  background: #f4f4f4;
+  border: 3px solid #2b2b2b;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.pagination__btn:hover:not(:disabled),
+.pagination__btn:focus-visible:not(:disabled) {
+  background: #ffe9e9;
+  outline: none;
+}
+
+.pagination__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.pagination__info {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+}
+
+.modal-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 40rem) {
+  .header-leds {
+    display: none;
+  }
+}

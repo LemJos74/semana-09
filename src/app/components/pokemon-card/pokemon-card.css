@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.75rem 0.75rem 1rem;
+  background: #fff;
+  border: 3px solid #2b2b2b;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.75);
+  outline: none;
+}
+
+.card:focus-visible {
+  border-color: #cc0000;
+}
+
+.card__id {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #7a7a7a;
+}
+
+.card__sprite {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.card__name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  word-break: break-word;
+}
+
+.card__types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 1.4rem;
+}
+
+.type-chip--placeholder {
+  width: 3rem;
+  height: 1.15rem;
+  background: #d9d9d9;
+}

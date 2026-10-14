@@ -1,0 +1,25 @@
+<button
+  type="button"
+  class="card"
+  (click)="onSelect()"
+  [attr.aria-label]="'Ver detalle de ' + displayName"
+>
+  <span class="card__id">{{ displayId }}</span>
+  <img
+    class="card__sprite"
+    [src]="sprite"
+    [alt]="displayName"
+    loading="lazy"
+    width="120"
+    height="120"
+  />
+  <span class="card__name">{{ displayName }}</span>
+  <span class="card__types">
+    @for (type of types; track type) {
+      <span class="type-chip" [attr.data-type]="type">{{ type }}</span>
+    } @empty {
+      <span class="type-chip type-chip--placeholder"></span>
+      <span class="type-chip type-chip--placeholder"></span>
+    }
+  </span>
+</button>

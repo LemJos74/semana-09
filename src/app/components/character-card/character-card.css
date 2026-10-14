@@ -1,0 +1,107 @@
+:host {
+  display: block;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 1rem 0.75rem 1.1rem;
+  background: #10231b;
+  border: 3px solid #24352d;
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.75);
+  border-color: #3dff87;
+  outline: none;
+}
+
+.card__avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #24352d;
+  background: #0b1210;
+}
+
+.card__id {
+  position: absolute;
+  top: 1.35rem;
+  right: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(11, 18, 16, 0.85);
+  border: 1px solid #24352d;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #7fd8a8;
+}
+
+.card__name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #eafff2;
+  word-break: break-word;
+}
+
+.card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.badge {
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  border: 2px solid #06120c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge--species,
+.status--unknown {
+  background: #4d6a5b;
+  color: #eafff2;
+}
+
+.status--Alive {
+  background: #3dff87;
+  color: #06120c;
+}
+
+.status--Dead {
+  background: #ff5f5f;
+  color: #1a0505;
+}
+
+.card__meta {
+  font-size: 0.75rem;
+  color: #7fd8a8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

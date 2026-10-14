@@ -1,0 +1,79 @@
+<div class="backdrop" (click)="close()" role="presentation">
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Detalle de ' + displayName"
+    (click)="$event.stopPropagation()"
+  >
+    <button type="button" class="modal__close" (click)="close()" aria-label="Cerrar">✕</button>
+
+    <header class="modal__header">
+      <span class="modal__id">{{ displayId }}</span>
+      <h2 class="modal__name">{{ displayName }}</h2>
+      <div class="modal__types">
+        @for (type of detail.types; track type.slot) {
+          <span class="type-chip" [attr.data-type]="type.name">{{ type.name }}</span>
+        }
+      </div>
+    </header>
+
+    <img
+      class="modal__sprite"
+      [src]="detail.sprite ?? ''"
+      [alt]="displayName"
+      width="220"
+      height="220"
+      [hidden]="!detail.sprite"
+    />
+
+    <section class="modal__facts">
+      <div class="fact">
+        <span class="fact__label">Altura</span>
+        <span class="fact__value">{{ detail.height / 10 }} m</span>
+      </div>
+      <div class="fact">
+        <span class="fact__label">Peso</span>
+        <span class="fact__value">{{ detail.weight / 10 }} kg</span>
+      </div>
+      <div class="fact">
+        <span class="fact__label">Exp. base</span>
+        <span class="fact__value">{{ detail.baseExperience ?? '—' }}</span>
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3 class="modal__section-title">Habilidades</h3>
+      <div class="modal__abilities">
+        @for (ability of detail.abilities; track ability.name) {
+          <span class="ability" [class.ability--hidden]="ability.isHidden">
+            {{ displayAbility(ability.name) }}
+            @if (ability.isHidden) {
+              <small>(oculta)</small>
+            }
+          </span>
+        }
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3 class="modal__section-title">Estadísticas base</h3>
+      <ul class="stats">
+        @for (stat of detail.stats; track stat.name) {
+          <li class="stat">
+            <span class="stat__label">{{ statLabel(stat.name) }}</span>
+            <span class="stat__bar-track">
+              <span class="stat__bar" [style.width.%]="statWidth(stat.baseStat)"></span>
+            </span>
+            <span class="stat__value">{{ stat.baseStat }}</span>
+          </li>
+        }
+        <li class="stat stat--total">
+          <span class="stat__label">Total</span>
+          <span class="stat__bar-track"></span>
+          <span class="stat__value">{{ totalStats }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>

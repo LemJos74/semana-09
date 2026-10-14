@@ -1,0 +1,29 @@
+<button
+  type="button"
+  class="card"
+  (click)="onSelect()"
+  [attr.aria-label]="'Ver detalle de ' + character.name"
+>
+  <img
+    class="card__avatar"
+    [src]="character.image"
+    [alt]="character.name"
+    loading="lazy"
+    width="240"
+    height="240"
+  />
+  <span class="card__id">#{{ character.id }}</span>
+  <span class="card__name">{{ character.name }}</span>
+  <span class="card__badges">
+    <span
+      class="badge"
+      [class.status--Alive]="character.status === 'Alive'"
+      [class.status--Dead]="character.status === 'Dead'"
+      [class.status--unknown]="character.status === 'unknown'"
+    >
+      {{ statusLabel }}
+    </span>
+    <span class="badge badge--species">{{ character.species }}</span>
+  </span>
+  <span class="card__meta">{{ character.gender }} · {{ character.location }}</span>
+</button>

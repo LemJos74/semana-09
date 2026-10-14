@@ -1,0 +1,115 @@
+<div class="rm">
+  <header class="rm__header">
+    <div class="rm__portal" aria-hidden="true"></div>
+    <div class="titles">
+      <h1 class="title">Rick and Morty</h1>
+      <p class="subtitle">826 personajes del multiverso · busca, filtra y abre el portal</p>
+    </div>
+    <div class="rm__leds" aria-hidden="true">
+      <span class="led"></span>
+      <span class="led led--dim"></span>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Búsqueda y filtros">
+    <div class="controls__inputs">
+      <div class="field">
+        <label class="field__label" for="rm-name">Nombre</label>
+        <input
+          id="rm-name"
+          class="field__input"
+          type="search"
+          placeholder="Rick, Morty, Summer..."
+          [value]="name()"
+          (input)="onNameInput($event)"
+          autocomplete="off"
+        />
+      </div>
+      <div class="field">
+        <label class="field__label" for="rm-species">Especie</label>
+        <input
+          id="rm-species"
+          class="field__input"
+          type="search"
+          placeholder="Human, Alien, Robot..."
+          [value]="species()"
+          (input)="onSpeciesInput($event)"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="filters">
+      <span class="filters__label">Estado:</span>
+      @for (opt of statusOptions; track opt.value) {
+        <button
+          type="button"
+          class="chip"
+          [class.chip--active]="status() === opt.value"
+          [attr.aria-pressed]="status() === opt.value"
+          (click)="setStatus(opt.value)"
+        >
+          {{ opt.label }}
+        </button>
+      }
+      @if (hasActiveFilters()) {
+        <button type="button" class="clear-btn" (click)="clearFilters()">Limpiar ✕</button>
+      }
+    </div>
+  </section>
+
+  <p class="status-line" role="status">
+    @if (loadStatus() === 'loading') {
+      Buscando en el multiverso...
+    } @else if (loadStatus() === 'ok' && characters().length === 0) {
+      Nada por aquí. Prueba con otros filtros.
+    } @else if (loadStatus() === 'ok') {
+      {{ total() }} personajes · página {{ page() }} de {{ totalPages() || 1 }}
+    }
+  </p>
+
+  @if (loadStatus() === 'error') {
+    <div class="alert" role="alert">No se pudo conectar con la API. Revisa tu conexión.</div>
+  }
+
+  <main class="grid">
+    @for (character of characters(); track character.id) {
+      <app-character-card [character]="character" (selected)="open($event)" />
+    }
+  </main>
+
+  @if (totalPages() > 1) {
+    <nav class="pagination" aria-label="Paginación">
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="page() <= 1 || loadStatus() === 'loading'"
+        (click)="prevPage()"
+      >
+        ← Anterior
+      </button>
+      <span class="pagination__info">{{ page() }} / {{ totalPages() }}</span>
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="page() >= totalPages() || loadStatus() === 'loading'"
+        (click)="nextPage()"
+      >
+        Siguiente →
+      </button>
+    </nav>
+  }
+</div>
+
+@if (modalLoading()) {
+  <div class="modal-loading" role="status">Cargando datos del personaje...</div>
+}
+
+@if (modalCharacter(); as character) {
+  <app-character-modal
+    [character]="character"
+    [firstEpisode]="modalEpisodes().first"
+    [lastEpisode]="modalEpisodes().last"
+    (closed)="closeModal()"
+  />
+}
