@@ -65,6 +65,13 @@ describe('SoundService', () => {
     expect(() => service.modalClose('portal')).not.toThrow();
     expect(() => service.success('pokemon')).not.toThrow();
     expect(() => service.enter('neutral')).not.toThrow();
+    expect(() => service.click('ki')).not.toThrow();
+    expect(() => service.modalOpen('ki')).not.toThrow();
+    expect(() => service.modalClose('ki')).not.toThrow();
+    expect(() => service.chipToggle('ki')).not.toThrow();
+    expect(() => service.pageChange('ki')).not.toThrow();
+    expect(() => service.success('ki')).not.toThrow();
+    expect(() => service.enter('ki')).not.toThrow();
   });
 
   it('should not play when muted', () => {

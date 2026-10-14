@@ -1,1 +1,1 @@
-export type SoundTheme = 'neutral' | 'pokemon' | 'portal';
+export type SoundTheme = 'neutral' | 'pokemon' | 'portal' | 'ki';

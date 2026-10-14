@@ -77,6 +77,16 @@
   border-color: #3dff87;
 }
 
+.card--ki {
+  background: #1a120b;
+  border-color: #4a3418;
+}
+
+.card--ki:hover,
+.card--ki:focus-visible {
+  border-color: #ff8c1a;
+}
+
 .card__glyph {
   font-size: 2rem;
   width: 3.25rem;
@@ -99,6 +109,10 @@
 
 .card--pokemon .card__tag {
   color: #ff7b7b;
+}
+
+.card--ki .card__tag {
+  color: #ffb347;
 }
 
 .card__title {
@@ -124,4 +138,8 @@
 
 .card--pokemon .card__cta {
   color: #ff7b7b;
+}
+
+.card--ki .card__cta {
+  color: #ffb347;
 }

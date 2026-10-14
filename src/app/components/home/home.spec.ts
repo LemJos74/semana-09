@@ -24,7 +24,7 @@ describe('Home', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     const cards = compiled.querySelectorAll('.card');
-    expect(cards.length).toBe(2);
+    expect(cards.length).toBe(3);
   });
 
   it('should link to both explorers', async () => {
@@ -34,6 +34,7 @@ describe('Home', () => {
     const hrefs = Array.from(compiled.querySelectorAll('a')).map((a) => a.getAttribute('href'));
     expect(hrefs).toContain('/pokedex');
     expect(hrefs).toContain('/rick-and-morty');
+    expect(hrefs).toContain('/dragon-ball');
   });
 
   it('should play the enter sound of the target API theme on click', () => {
@@ -46,5 +47,8 @@ describe('Home', () => {
 
     component.onEnter(component.apis[1]);
     expect(sound.enter).toHaveBeenCalledWith('portal');
+
+    component.onEnter(component.apis[2]);
+    expect(sound.enter).toHaveBeenCalledWith('ki');
   });
 });

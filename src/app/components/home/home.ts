@@ -27,6 +27,17 @@ const APIS: (ApiMenuItem & { theme: SoundTheme; glyph: string; accent: string })
     glyph: '🌀',
     accent: 'card--portal',
   },
+  {
+    id: 'dragonball',
+    title: 'Dragon Ball Z',
+    description:
+      'Los 58 guerreros con filtro por raza y búsqueda por nombre. Detalle con ki, planeta de origen y transformaciones.',
+    route: '/dragon-ball',
+    tag: 'Dragon Ball API',
+    theme: 'ki',
+    glyph: '💥',
+    accent: 'card--ki',
+  },
 ];
 
 @Component({

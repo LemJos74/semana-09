@@ -13,6 +13,7 @@
         class="card"
         [class.card--pokemon]="api.accent === 'card--pokemon'"
         [class.card--portal]="api.accent === 'card--portal'"
+        [class.card--ki]="api.accent === 'card--ki'"
         [routerLink]="api.route"
         (click)="onEnter(api)"
       >

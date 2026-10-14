@@ -1,0 +1,30 @@
+<button
+  type="button"
+  class="card"
+  (click)="onSelect()"
+  [attr.aria-label]="'Ver detalle de ' + character.name"
+>
+  <span class="card__id">{{ displayId }}</span>
+  <span class="card__image-wrap">
+    <img
+      class="card__image"
+      [src]="character.image"
+      [alt]="character.name"
+      loading="lazy"
+      width="240"
+      height="240"
+    />
+  </span>
+  <span class="card__name">{{ character.name }}</span>
+  <span class="card__badges">
+    <span class="badge badge--race">{{ character.race }}</span>
+    <span
+      class="badge badge--affiliation"
+      [class.badge--z]="character.affiliation === 'Z Fighter'"
+      [class.badge--villain]="character.affiliation === 'Villain'"
+    >
+      {{ character.affiliation }}
+    </span>
+  </span>
+  <span class="card__ki">Ki {{ character.ki }}</span>
+</button>

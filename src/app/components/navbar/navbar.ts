@@ -15,6 +15,7 @@ export class Navbar {
     { path: '/', label: 'Inicio', exact: true },
     { path: '/pokedex', label: 'Pokémon', exact: false },
     { path: '/rick-and-morty', label: 'Rick and Morty', exact: false },
+    { path: '/dragon-ball', label: 'Dragon Ball Z', exact: false },
   ];
 
   onToggleSound(): void {

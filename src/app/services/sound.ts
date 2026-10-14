@@ -33,6 +33,9 @@ export class SoundService {
       case 'portal':
         this.tone({ freq: 392, dur: 0.1 });
         break;
+      case 'ki':
+        this.tone({ freq: 587, type: 'triangle', dur: 0.1 });
+        break;
       default:
         this.tone({ freq: 660, dur: 0.12 });
     }
@@ -49,6 +52,13 @@ export class SoundService {
         this.tone({ freq: 200, glideTo: 600, dur: 0.35, gain: 0.8, vibrato: 5 });
         this.noise(0, 0.3);
         break;
+      case 'ki': {
+        const notes = [523, 659, 784, 1046];
+        notes.forEach((freq, i) =>
+          this.tone({ freq, type: 'triangle', dur: 0.1, gain: 0.6, start: i * 0.06 }),
+        );
+        break;
+      }
       default:
         this.tone({ freq: 523, dur: 0.1 });
         this.tone({ freq: 784, dur: 0.12, start: 0.08 });
@@ -65,6 +75,13 @@ export class SoundService {
       case 'portal':
         this.tone({ freq: 600, glideTo: 180, dur: 0.3, gain: 0.8, vibrato: 5 });
         break;
+      case 'ki': {
+        const notes = [1046, 784, 659];
+        notes.forEach((freq, i) =>
+          this.tone({ freq, type: 'triangle', dur: 0.1, gain: 0.55, start: i * 0.06 }),
+        );
+        break;
+      }
       default:
         this.tone({ freq: 784, dur: 0.08 });
         this.tone({ freq: 523, dur: 0.1, start: 0.07 });
@@ -80,6 +97,9 @@ export class SoundService {
       case 'portal':
         this.tone({ freq: 440, type: 'triangle', dur: 0.08 });
         break;
+      case 'ki':
+        this.tone({ freq: 698, type: 'triangle', dur: 0.09, gain: 0.6 });
+        break;
       default:
         this.tone({ freq: 587, dur: 0.09 });
     }
@@ -93,6 +113,10 @@ export class SoundService {
         break;
       case 'portal':
         this.tone({ freq: 520, glideTo: 260, dur: 0.15, gain: 0.8 });
+        break;
+      case 'ki':
+        this.tone({ freq: 880, type: 'triangle', dur: 0.08, gain: 0.55 });
+        this.tone({ freq: 1175, type: 'triangle', dur: 0.07, gain: 0.4, start: 0.06 });
         break;
       default:
         this.tone({ freq: 494, dur: 0.09 });
@@ -113,6 +137,10 @@ export class SoundService {
         this.tone({ freq: 400, glideTo: 600, dur: 0.2, gain: 0.8, vibrato: 6 });
         this.tone({ freq: 600, glideTo: 850, dur: 0.22, gain: 0.7, vibrato: 6, start: 0.18 });
         break;
+      case 'ki':
+        this.tone({ freq: 440, glideTo: 880, dur: 0.18, gain: 0.7 });
+        this.tone({ freq: 660, glideTo: 1320, dur: 0.18, gain: 0.55, start: 0.14 });
+        break;
       default:
         [523, 659, 784].forEach((freq, i) =>
           this.tone({ freq, type: 'triangle', dur: 0.12, start: i * 0.09 }),
@@ -130,6 +158,11 @@ export class SoundService {
       case 'portal':
         this.noise(0, 0.25);
         this.tone({ freq: 240, glideTo: 700, dur: 0.3, gain: 0.75, vibrato: 5 });
+        break;
+      case 'ki':
+        this.tone({ freq: 330, glideTo: 660, dur: 0.22, gain: 0.7 });
+        this.tone({ freq: 494, glideTo: 988, dur: 0.2, gain: 0.5, start: 0.16 });
+        this.noise(0, 0.18);
         break;
       default:
         this.tone({ freq: 523, dur: 0.1 });

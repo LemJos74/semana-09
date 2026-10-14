@@ -1,0 +1,98 @@
+<div class="dbz">
+  <header class="dbz__header">
+    <div class="dbz__orb" aria-hidden="true"></div>
+    <div class="titles">
+      <h1 class="title">Dragon Ball Z</h1>
+      <p class="subtitle">
+        58 guerreros y 43 transformaciones · busca, filtra por raza y siente el ki
+      </p>
+    </div>
+    <div class="dbz__stars" aria-hidden="true">
+      <span class="star">★</span>
+      <span class="star star--dim">★</span>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Búsqueda y filtros">
+    <div class="field">
+      <label class="field__label" for="dbz-name">Nombre</label>
+      <input
+        id="dbz-name"
+        class="field__input"
+        type="search"
+        placeholder="Goku, Vegeta, Freezer..."
+        [value]="name()"
+        (input)="onNameInput($event)"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="filters">
+      <span class="filters__label">Raza:</span>
+      @for (r of races; track r) {
+        <button
+          type="button"
+          class="chip"
+          [class.chip--active]="race() === r"
+          [attr.aria-pressed]="race() === r"
+          (click)="setRace(r)"
+        >
+          {{ r === '' ? 'Todas' : r }}
+        </button>
+      }
+      @if (hasActiveFilters()) {
+        <button type="button" class="clear-btn" (click)="clearFilters()">Limpiar ✕</button>
+      }
+    </div>
+  </section>
+
+  <p class="status-line" role="status">
+    @if (loadStatus() === 'loading') {
+      Reuniendo el ki...
+    } @else if (loadStatus() === 'ok' && characters().length === 0) {
+      Nada por aquí. Prueba con otra raza o nombre.
+    } @else if (loadStatus() === 'ok') {
+      {{ total() }} personajes · página {{ page() }} de {{ totalPages() || 1 }}
+    }
+  </p>
+
+  @if (loadStatus() === 'error') {
+    <div class="alert" role="alert">No se pudo conectar con la API. Revisa tu conexión.</div>
+  }
+
+  <main class="grid">
+    @for (character of characters(); track character.id) {
+      <app-dbz-card [character]="character" (selected)="open($event)" />
+    }
+  </main>
+
+  @if (totalPages() > 1 && !hasActiveFilters()) {
+    <nav class="pagination" aria-label="Paginación">
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="page() <= 1 || loadStatus() === 'loading'"
+        (click)="prevPage()"
+      >
+        ← Anterior
+      </button>
+      <span class="pagination__info">{{ page() }} / {{ totalPages() }}</span>
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="page() >= totalPages() || loadStatus() === 'loading'"
+        (click)="nextPage()"
+      >
+        Siguiente →
+      </button>
+    </nav>
+  }
+</div>
+
+@if (modalLoading()) {
+  <div class="modal-loading" role="status">Cargando datos del personaje...</div>
+}
+
+@if (modalDetail(); as detail) {
+  <app-dbz-modal [detail]="detail" (closed)="closeModal()" />
+}

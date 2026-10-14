@@ -1,0 +1,77 @@
+<div class="backdrop" (click)="close()" role="presentation">
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Detalle de ' + detail.name"
+    (click)="$event.stopPropagation()"
+  >
+    <button type="button" class="modal__close" (click)="close()" aria-label="Cerrar">✕</button>
+
+    <header class="modal__header">
+      <img
+        class="modal__avatar"
+        [src]="detail.image"
+        [alt]="detail.name"
+        width="200"
+        height="200"
+      />
+      <div class="modal__heading">
+        <span class="modal__id">{{ displayId }}</span>
+        <h2 class="modal__name">{{ detail.name }}</h2>
+        <span class="badge badge--race">{{ detail.race }}</span>
+        <span class="badge" [class.badge--z]="detail.affiliation === 'Z Fighter'">
+          {{ detail.affiliation }}
+        </span>
+      </div>
+    </header>
+
+    <section class="modal__facts">
+      <div class="fact fact--ki">
+        <span class="fact__label">Ki actual</span>
+        <span class="fact__value">{{ detail.ki }}</span>
+      </div>
+      <div class="fact fact--ki">
+        <span class="fact__label">Ki máximo</span>
+        <span class="fact__value">{{ detail.maxKi }}</span>
+      </div>
+      <div class="fact">
+        <span class="fact__label">Género</span>
+        <span class="fact__value">{{ detail.gender }}</span>
+      </div>
+      <div class="fact">
+        <span class="fact__label">Planeta de origen</span>
+        <span class="fact__value">
+          {{ detail.originPlanet?.name ?? 'Desconocido' }}
+          @if (detail.originPlanet?.isDestroyed) {
+            <small class="destroyed">(destruido)</small>
+          }
+        </span>
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3 class="modal__section-title">Descripción</h3>
+      <p class="modal__description">{{ detail.description || 'Sin descripción.' }}</p>
+    </section>
+
+    <section class="modal__section">
+      <h3 class="modal__section-title">Transformaciones ({{ detail.transformations.length }})</h3>
+      @if (hasTransformations) {
+        <ul class="transformations">
+          @for (t of detail.transformations; track t.id) {
+            <li class="transformation">
+              <img class="transformation__image" [src]="t.image" [alt]="t.name" loading="lazy" />
+              <span class="transformation__info">
+                <span class="transformation__name">{{ t.name }}</span>
+                <span class="transformation__ki">Ki {{ t.ki }}</span>
+              </span>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="modal__empty">Sin transformaciones registradas.</p>
+      }
+    </section>
+  </div>
+</div>
